@@ -35,7 +35,7 @@ public class ShowFps : MonoBehaviour {
 				GameObject go = new GameObject("FPS Display", typeof(GUIText));
 				go.hideFlags = HideFlags.HideAndDontSave;
 				go.transform.position = new Vector3(0.2f, 0.9f, 0);
-				gui = go.guiText;
+				gui = go.GetComponent<GUIText>();
 				gui.pixelOffset = new Vector2(5,55);
 			}
 

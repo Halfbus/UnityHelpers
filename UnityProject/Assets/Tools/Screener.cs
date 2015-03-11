@@ -23,15 +23,15 @@ public class Screener : MonoBehaviour {
 		// The "24" can be 0,16,24 or formats like RenderTextureFormat.Default, ARGB32 etc.
 		RenderTexture tempRT = new RenderTexture( sqrw, sqrh, 24, RenderTextureFormat.ARGB32 ); 
 		tempRT.filterMode = FilterMode.Trilinear;
-		camera.targetTexture = tempRT;
-		camera.Render();
+		GetComponent<Camera>().targetTexture = tempRT;
+		GetComponent<Camera>().Render();
 		RenderTexture.active = tempRT;
 
 		Texture2D virtualPhoto = new Texture2D( sqrw,sqrh, TextureFormat.ARGB32, false ); // false, meaning no need for mipmaps
 		virtualPhoto.ReadPixels( new Rect( 0, 0, sqrw,sqrh ), 0, 0 ); // you get the center section
 		
 		RenderTexture.active = null; // "just in case" 
-		camera.targetTexture = null;
+		GetComponent<Camera>().targetTexture = null;
 		//Destroy(tempRT); - tricky on android and other platforms, take care
 
 		// Write to file

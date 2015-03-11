@@ -11,16 +11,15 @@ public class BuildMachine : MonoBehaviour{
 
 	[MenuItem("File/CI/Build IOS Player")]		
 	static void PerformIOSBuild(){
-		EditorUserBuildSettings.selectedBuildTargetGroup = BuildTargetGroup.iPhone;
+		EditorUserBuildSettings.selectedBuildTargetGroup = BuildTargetGroup.iOS;
 		scenes = enabledScenes;
 		targetDir = "IOSBuild";
 
 		System.IO.Directory.CreateDirectory(Application.dataPath.Replace("Assets", targetDir));
 		Debug.Log("Creating path:" + (Application.dataPath.Replace("Assets", targetDir)));
 
-		currentBuildTarget = BuildTarget.iPhone;
+		currentBuildTarget = BuildTarget.iOS;
 		options = BuildOptions.Development;
-		EditorUserBuildSettings.appendProject = false;
 
 		print("Active Build Target:" + EditorUserBuildSettings.activeBuildTarget);
 		
@@ -53,7 +52,7 @@ public class BuildMachine : MonoBehaviour{
 		EditorUserBuildSettings.connectProfiler = true;
 		EditorUserBuildSettings.symlinkLibraries = true;
 
-		string res = BuildPipeline.BuildPlayer(scenes, targetDir, BuildTarget.iPhone, options);
+		string res = BuildPipeline.BuildPlayer(scenes, targetDir, BuildTarget.iOS, options);
 		if(res.Length > 0){
 			throw new System.Exception("BuildPlayer failed:" + res);
 		}	
@@ -72,7 +71,7 @@ public class BuildMachine : MonoBehaviour{
 	static void SwitchPlatform(){
 		Debug.Log("Switching BuildTarget");
 		EditorUserBuildSettings.activeBuildTargetChanged += startBuildingPlayer;
-		EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.iPhone);	
+		EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.iOS);	
 	}
 
 	static void startBuildingPlayer(){
